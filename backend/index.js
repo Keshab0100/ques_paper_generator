@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
+const port = process.env.PORT || 8000
 const { Configuration, OpenAIApi } = require("openai");
 
 const config = new Configuration({
-  apiKey: "",
+  apiKey: process.env.API_KEY,
 });
 
 const openai = new OpenAIApi(config);
@@ -17,7 +17,7 @@ app.use(cors());
 app.post("/chat", async (req, res) => {
   try {
     const prompt = req.body.prompt || "Hello, how are you?";
-    const response = await openai.Completion.create({
+    const response = await openai.createCompletion({
       engine: "davinci",
       prompt,
       maxTokens: 200,
@@ -30,4 +30,8 @@ app.post("/chat", async (req, res) => {
     console.error(error);
     res.status(500).send("An error occurred while generating text.");
   }
+});
+
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}.`);
 });
