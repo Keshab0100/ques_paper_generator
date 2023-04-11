@@ -1,37 +1,26 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const port = process.env.PORT || 8000
-const { Configuration, OpenAIApi } = require("openai");
+import { config } from "dotenv"
+config()
 
-const config = new Configuration({
-  apiKey: process.env.API_KEY,
-});
+import { Configuration, OpenAIApi } from "openai"
+import readline from "readline"
 
-const openai = new OpenAIApi(config);
+const openAi = new OpenAIApi(
+  new Configuration({
+    apiKey: process.env.OPEN_AI_API_KEY,
+  })
+)
 
-const app = express();
-app.use(bodyParser.json());
-app.use(cors());
+const userInterface = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+})
 
-app.post("/chat", async (req, res) => {
-  try {
-    const prompt = req.body.prompt || "Hello, how are you?";
-    const response = await openai.createCompletion({
-      engine: "davinci",
-      prompt,
-      maxTokens: 200,
-      n: 1,
-      stop: "\n",
-    });
-    const text = response.choices[0].text;
-    res.send(text);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred while generating text.");
-  }
-});
-
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}.`);
-});
+userInterface.prompt()
+userInterface.on("line", async input => {
+  const response = await openAi.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: input }],
+  })
+  console.log(response.data.choice)
+  userInterface.prompt()
+})

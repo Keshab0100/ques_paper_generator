@@ -1,0 +1,53 @@
+/* Form container */
+.form-parent{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* Style the form container */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* Style the form labels */
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Style the form inputs */
+  .form-input {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  /* Style the form button */
+  .form-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Style the form button on hover */
+  .form-button:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Style the form button on focus */
+  .form-button:focus {
+    outline: none;
+  }
+  
