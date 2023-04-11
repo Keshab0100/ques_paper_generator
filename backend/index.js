@@ -1,44 +1,31 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require('dotenv')
-dotenv.config()
-const bodyParser = require("body-parser");
-const port = process.env.PORT || 8000
-const { Configuration, OpenAIApi } = require("openai");
+import { Configuration, OpenAIApi } from "openai"
+import { config } from "dotenv"
+import readline from "readline"
+import express from 'express'
+import cors from "cors"
+import bodyParser from "body-parser"
+const port = process.env.PORT || 8000;
+config()
 
-const config = new Configuration({
-  apiKey: "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",
-});
-
-const openai = new OpenAIApi(config);
+const openAi = new OpenAIApi(
+  new Configuration({
+    apiKey: process.env.API_KEY,
+  })
+)
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/", (req, res)=>{
-  console.log(process.env.API_KEY)
-  res.json("message: hi")
-})
-
-app.post("/chat", async (req, res) => {
-  try {
-    const prompt = req.body.prompt || "Hello, how are you?";
-    const response = await openai.createCompletion({
-      model: "gpt-3.5-turbo",
-      prompt: prompt,
-      maxTokens: 512,
-      temperature: 0
-    });
-    const text = response.data.choices[0].text;
-    res.send(text);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("An error occurred while generating text.");
-  }
+app.post("/", async (req, res) => {
+  const response = await openAi.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: req.body.prompt }],
+  })
+  res.status(200).send(response.data.choices[0].message.content)
 });
+
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}.`);
-  console.log(process.env.API_KEY)
 });
