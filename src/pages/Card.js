@@ -12,7 +12,7 @@ const Card = () => {
   const [flag, setFlag] = useState(false);
   const getques = async () => {
     setFlag(true);
-    const req = `create ${quant} ${type} questions based on ${subject} and the following topics ${topic} in json format`;
+    const req = `create ${quant} ${type} questions based on ${subject} and the following topics ${topic} in array format`;
     try {
       const res = await axios.post("http://localhost:8000", { prompt: req });
       console.log(res.data);
@@ -90,7 +90,7 @@ const Card = () => {
           {!Data && flag && (
             <ReactLoading type={"spin"} color={"#000"} height={"5%"} />
           )}
-          {Data &&
+          {/* {Data &&
             Data.questions.map((question, index) => (
               <div key={index}>
                 <p>
@@ -104,7 +104,8 @@ const Card = () => {
                 <p>Answer: {question.answer}</p>
                 <br />
               </div>
-            ))}
+            ))} */}
+            {Data}
         </div>
       </div>
     </div>
