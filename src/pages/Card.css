@@ -1,53 +1,50 @@
-/* Form container */
-.form-parent{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 50%;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 20px;
+  padding: 20px
 }
-/* Style the form container */
-.form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  /* Style the form labels */
-  label {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  /* Style the form inputs */
-  .form-input {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 100%;
-  }
-  
-  /* Style the form button */
-  .form-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Style the form button on hover */
-  .form-button:hover {
-    background-color: #3e8e41;
-  }
-  
-  /* Style the form button on focus */
-  .form-button:focus {
-    outline: none;
-  }
-  
+
+label {
+  font-size: 18px;
+  margin-bottom: 10px;
+  margin-right: 1rem;
+}
+
+input,
+select {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+  font-size: 16px;
+  margin-left: auto;
+}
+
+.form-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #3e8e41;
+}
+
+textarea {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  resize: none;
+  box-shadow: 1px 1px 5px #ccc;
+}
